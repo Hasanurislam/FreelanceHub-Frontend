@@ -4,36 +4,43 @@ import { useQuery } from "@tanstack/react-query";
 import { IoSearchSharp, IoLogoDesignernews } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
 import newRequest from "../utils/newRequest"; // Assuming this is your configured axios instance
+import designIcon from '../assets/logo-design-49574.png';
+import software from '../assets/software-icon-32076.png';
+import marketingLogo from '../assets/marketing-png-1310.png';
+import AiLogo from '../assets/ai-icon-12109.png';
+import contendWritting from '../assets/marketing-png-1288.png';
+import AnimationLogo from '../assets/video-play-icon-11392.png';
+
 
 // --- Updated Popular Categories with Image Paths ---
 const Populer_Categories = [
   { 
-    icon: "/public/logo-design-49574.png", 
+    icon: designIcon, 
     title: "Design", 
     query: "design" 
   },
   { 
-    icon: "/public/software-icon-32076.png", 
+    icon: software, 
     title: "Software Development", 
     query: "development" 
   },
   { 
-    icon: "/public/marketing-png-1288.png", 
+    icon: contendWritting, 
     title: "Content Writing", 
     query: "writing" 
   },
   { 
-    icon: "/public/ai-icon-12109.png", 
+    icon: AiLogo, 
     title: "AI Services", 
     query: "ai" 
   },
   { 
-    icon: "/public/marketing-png-1310.png", 
+    icon: marketingLogo, 
     title: "Digital Marketing", 
     query: "marketing" 
   },
   { 
-    icon: "/public/video-play-icon-11392.png", 
+    icon: AnimationLogo, 
     title: "Video & Animation", 
     query: "animation" 
   },
@@ -72,7 +79,7 @@ const Header = () => {
   });
 
   // Fetch featured gigs for the default view
-  const { data: featuredGigs } = useQuery({
+  const { data: featuredGigs, isLoading: isLoadingFeatured } = useQuery({
       queryKey: ['featuredGigs'],
       queryFn: () => newRequest.get(`/gigs?sort=sales&limit=4`).then((res) => res.data), // Example: fetch top 4 best-selling
       enabled: !searchTerm.trim(), // Only run when not searching
@@ -187,10 +194,13 @@ const Header = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {featuredGigs ? (
+            {/* ✅ FIX: Added a check to ensure featuredGigs is an array before mapping */}
+            {isLoadingFeatured ? (
+                <p>Loading...</p>
+            ) : Array.isArray(featuredGigs) ? (
                 featuredGigs.map((gig) => <GigCard key={gig._id} gig={gig} />)
             ) : (
-                <p>Loading...</p>
+                <p className="col-span-full text-center">Could not load featured gigs.</p>
             )}
           </div>
         </div>

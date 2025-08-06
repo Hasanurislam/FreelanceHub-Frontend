@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import newRequest from '../utils/newRequest';
+import logo from '../assets/freelancehub-high-resolution-logo-transparent (1).png';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -93,7 +94,7 @@ const Navbar = () => {
         <div className='flex items-center justify-between h-20'>
           <div className="flex-1 flex items-center justify-start">
             <Link to="/">
-              <img className='w-36 h-auto' src='/src/assets/freelancehub-high-resolution-logo-transparent (1).png' alt='Logo' />
+              <img className='w-36 h-auto' src={logo} alt='Logo' />
             </Link>
           </div>
           <div className="hidden md:flex flex-1 justify-center">

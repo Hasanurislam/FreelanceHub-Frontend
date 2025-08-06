@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../Component/Navbar'; 
+import CEO from '../assets/WhatsApp Image 2024-09-19 at 22.31.04_e0d1889a.jpg';
 
 const About = () => {
   const teamMembers = [
     {
       name: 'Hasanur Islam',
       role: 'Founder & CEO',
-      imageUrl: '/public/WhatsApp Image 2024-09-19 at 22.31.04_e0d1889a.jpg',
+      imageUrl: CEO,
       bio: 'Jane is the visionary behind FreelanceHub, dedicated to creating a fair and efficient marketplace for freelancers and clients.'
     },
     {
