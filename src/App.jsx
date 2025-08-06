@@ -21,7 +21,7 @@ import BecomeSeller from "./Pages/BecomeSeller";
 import About from "./Pages/About";
 import Earnings from "./Pages/Earnings";
 
-const stripePromise = loadStripe("pk_test_51Rrc7lKmrOuTLPbt92l7z3rn5UIuK3G2mgcw1N7OYWvwB9H2CSX7H2xMVeboVuFQjbLbcL6XWFxy0BXKUdgzNJaq00reeTu9rG"); // use your Stripe public key here
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY); 
 
 function App() {
   return (
