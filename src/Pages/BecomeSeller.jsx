@@ -19,19 +19,17 @@ const BecomeSeller = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // This endpoint will update the user's isSeller status
-            await newRequest.put("/users/become-seller", formData);
-            toast.success("Congratulations! You are now a seller.");
+            // ✅ FIX: The backend will now return the updated user object with a new token
+            const res = await newRequest.put("/users/become-seller", formData);
             
-            // Update user in local storage
-            const user = JSON.parse(localStorage.getItem("currentUser"));
-            user.isSeller = true;
-            localStorage.setItem("currentUser", JSON.stringify(user));
+            // Update user in local storage with the fresh data from the server
+            localStorage.setItem("currentUser", JSON.stringify(res.data));
 
-           
+            toast.success("Congratulations! You are now a seller.");
+
+            // Redirect to the homepage. A full reload is no longer necessary.
             setTimeout(() => {
                 navigate("/");
-                window.location.reload(); 
             }, 2000);
 
         } catch (err) {
@@ -73,7 +71,7 @@ const BecomeSeller = () => {
 
                 <div className="bg-white shadow-2xl rounded-2xl overflow-hidden">
                     <div className="grid grid-cols-1 md:grid-cols-2">
-                      
+                        {/* Left Side: Benefits */}
                         <div className="p-8 bg-purple-700 text-white">
                             <h2 className="text-3xl font-bold mb-6">Why Sell With Us?</h2>
                             <ul className="space-y-6">
@@ -91,7 +89,7 @@ const BecomeSeller = () => {
                             </ul>
                         </div>
 
-                        
+                        {/* Right Side: Form */}
                         <div className="p-8">
                             <h2 className="text-2xl font-bold text-gray-800 mb-6">Activate Your Seller Profile</h2>
                             <form onSubmit={handleSubmit} className="space-y-6">
