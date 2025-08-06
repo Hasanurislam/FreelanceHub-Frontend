@@ -207,7 +207,8 @@ const Order = () => {
                                             </td>
                                             <td className="py-4 px-4">
                                                 {/* ✅ FIX: Use the new UserDisplay component */}
-                                                <UserDisplay userId={currentUser.isSeller ? order.buyerId : order.sellerId} />
+                                                <UserDisplay userId={(currentUser.isSeller ? order.buyerId : order.sellerId)?._id} />
+
                                             </td>
                                             <td className="py-4 px-4 text-gray-600">₹{order.price.toLocaleString()}</td>
                                             <td className="py-4 px-4 text-gray-600">{new Date(order.createdAt).toLocaleDateString()}</td>
